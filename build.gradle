@@ -1,14 +1,25 @@
+apply plugin: 'groovy'
+apply plugin: 'idea'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-//    compile gradleApi()
-//    compile localGroovy()
+    compile localGroovy()
 }
 
-//defaultTasks 'stress'
+// task to execute the Groovy script
+task cpu (dependsOn: 'classes', type: JavaExec) {
+  main = 'cpustresser'
+  classpath = sourceSets.main.runtimeClasspath
+  if (project.hasProperty('seconds')) {
+    // Pass command-line argument to script.
+    args project.getProperty('seconds')
+  }
+}
+
+defaultTasks 'cpu'
 
 task createWrapper(type: Wrapper) {
   gradleVersion = '2.6'
