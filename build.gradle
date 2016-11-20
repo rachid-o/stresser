@@ -22,5 +22,5 @@ task cpu (dependsOn: 'classes', type: JavaExec) {
 defaultTasks 'cpu'
 
 task createWrapper(type: Wrapper) {
-  gradleVersion = '2.6'
+  gradleVersion = '3.2'
 }
